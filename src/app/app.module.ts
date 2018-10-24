@@ -6,6 +6,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { AsideMenuComponent } from './aside-menu/aside-menu.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
     SidebarComponent,
     FooterComponent,
     MainComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    AsideMenuComponent
   ],
   imports: [
     BrowserModule

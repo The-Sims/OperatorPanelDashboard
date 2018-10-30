@@ -8,6 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import {ServicesComponent} from './views/services/services.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,17 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: 'services',
+        component: ServicesComponent,
+        data: {
+          title: 'Services'
+        }
+      },
+      {
+        path: 'incident',
+        loadChildren: './views/incident/incident.module#IncidentModule'
+      },
       {
         path: 'base',
         loadChildren: './views/base/base.module#BaseModule'

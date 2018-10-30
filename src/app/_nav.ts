@@ -10,6 +10,24 @@ export const navItems = [
   },
   {
     title: true,
+    name: 'Services'
+  },
+  {
+    name: 'Services',
+    url: '/services',
+    icon: 'icon-drop'
+  },
+  {
+    title: true,
+    name: 'Incidents'
+  },
+  {
+    name: 'Incidents',
+    url: '/incident/list',
+    icon: 'icon-drop'
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {
@@ -215,17 +233,4 @@ export const navItems = [
       }
     ]
   },
-  {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/angular/',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success'
-  },
-  {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
-    variant: 'danger'
-  }
 ];

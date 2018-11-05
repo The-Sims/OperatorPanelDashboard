@@ -41,6 +41,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ServicesComponent } from './views/services/services.component';
 import { IncidentListComponent } from './views/incident/incident-list/incident-list.component';
+import {DataTablesModule} from 'angular-datatables';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { IncidentListComponent } from './views/incident/incident-list/incident-l
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    DataTablesModule
   ],
   declarations: [
     AppComponent,
@@ -65,10 +67,6 @@ import { IncidentListComponent } from './views/incident/incident-list/incident-l
     RegisterComponent,
     ServicesComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

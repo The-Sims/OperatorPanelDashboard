@@ -31,6 +31,6 @@
     </div>
   </div>
   <div *ngIf="httpError != null">
-    <app-error-card [title]="httpError.name" [message]="httpError.message"></app-error-card>
+    <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
   </div>
 </div>

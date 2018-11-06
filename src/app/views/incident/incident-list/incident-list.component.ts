@@ -3,6 +3,8 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
 import {IncidentsService} from '../../../services/incidents.service';
+import {HttpErrorResponse} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-incident-list',
@@ -11,6 +13,7 @@ import {IncidentsService} from '../../../services/incidents.service';
 })
 export class IncidentListComponent implements OnInit {
   public tableWidget: any;
+  public httpError: HttpErrorResponse = null;
 
   constructor(private incidentService: IncidentsService) { }
 
@@ -20,6 +23,9 @@ export class IncidentListComponent implements OnInit {
         console.log(data[0]);
 
         this.initDatatable();
+      }, error => {
+        this.httpError = error;
+        console.error('Couldn\'t connect to the rest server', error);
       }
     );
   }

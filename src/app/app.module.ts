@@ -60,7 +60,7 @@ import {IncidentsService} from './services/incidents.service';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    DataTablesModule
+    DataTablesModule,
   ],
   declarations: [
     AppComponent,
@@ -69,7 +69,7 @@ import {IncidentsService} from './services/incidents.service';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ServicesComponent
+    ServicesComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [IncidentsService]

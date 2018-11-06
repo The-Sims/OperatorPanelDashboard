@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-  <div class="card">
+  <div *ngIf="httpError == null" class="card">
     <div class="card-header">
       Incoming messages
     </div>
@@ -29,5 +29,8 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div *ngIf="httpError != null">
+    <app-error-card [title]="httpError.name" [message]="httpError.message"></app-error-card>
   </div>
 </div>

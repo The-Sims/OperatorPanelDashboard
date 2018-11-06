@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import {IncidentsService} from '../../../services/incidents.service';
 
 @Component({
   selector: 'app-incident-list',
@@ -11,10 +12,16 @@ import 'datatables.net-bs4';
 export class IncidentListComponent implements OnInit {
   public tableWidget: any;
 
-  constructor() { }
+  constructor(private incidentService: IncidentsService) { }
 
   ngOnInit() {
-    this.initDatatable();
+    this.incidentService.getAll().subscribe(
+      data => {
+        console.log(data[0]);
+
+        this.initDatatable();
+      }
+    );
   }
 
   private initDatatable(): void {

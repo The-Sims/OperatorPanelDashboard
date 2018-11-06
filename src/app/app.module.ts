@@ -32,6 +32,8 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 
+import {HttpClientModule} from '@angular/common/http';
+
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
@@ -42,6 +44,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ServicesComponent } from './views/services/services.component';
 import { IncidentListComponent } from './views/incident/incident-list/incident-list.component';
 import {DataTablesModule} from 'angular-datatables';
+import {IncidentsService} from './services/incidents.service';
 
 @NgModule({
   imports: [
@@ -50,6 +53,7 @@ import {DataTablesModule} from 'angular-datatables';
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
+    HttpClientModule,
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
@@ -67,6 +71,7 @@ import {DataTablesModule} from 'angular-datatables';
     RegisterComponent,
     ServicesComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [IncidentsService]
 })
 export class AppModule { }

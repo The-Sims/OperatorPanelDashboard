@@ -45,6 +45,9 @@ import { ServicesComponent } from './views/services/services.component';
 import { IncidentListComponent } from './views/incident/incident-list/incident-list.component';
 import {DataTablesModule} from 'angular-datatables';
 import {IncidentsService} from './services/incidents.service';
+import {ErrorCardComponent} from './utilcomponents/error-card/error-card.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginOperatorService} from './services/login-operator.service';
 
 @NgModule({
   imports: [
@@ -61,6 +64,8 @@ import {IncidentsService} from './services/incidents.service';
     TabsModule.forRoot(),
     ChartsModule,
     DataTablesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -72,6 +77,6 @@ import {IncidentsService} from './services/incidents.service';
     ServicesComponent,
   ],
   bootstrap: [ AppComponent ],
-  providers: [IncidentsService]
+  providers: [IncidentsService, LoginOperatorService]
 })
 export class AppModule { }

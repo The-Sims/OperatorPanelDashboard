@@ -14,10 +14,10 @@ export class GenericService<T> {
   };
 
   constructor(protected http: HttpClient) {
-    this.url = 'http://recipe.basvdeertwegh.nl/';
+    this.url = 'http://localhost:8095/SIMS/';
   }
 
-  private getUrl(): string {
+  protected getUrl(): string {
     return this.url + (this.domain != null ? this.domain : '');
   }
 
@@ -26,10 +26,14 @@ export class GenericService<T> {
   }
 
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.getUrl() + 'all');
+    return this.http.get<T[]>(this.getUrl() + ServiceEnum.ALL);
   }
 
   save(t: T): Observable<T> {
-    return this.http.post<T>(this.getUrl() + 'save', t, this.httpOptions);
+    return this.http.post<T>(this.getUrl() + ServiceEnum.SAVE, t, this.httpOptions);
+  }
+
+  edit(t: T): Observable<T> {
+    return this.http.put<T>(this.getUrl() + ServiceEnum.EDIT, t, this.httpOptions);
   }
 }

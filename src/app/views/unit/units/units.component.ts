@@ -27,6 +27,7 @@ export class UnitsComponent implements OnInit {
       console.log(msg.getMessageType);
       console.log(msg.getMessageData);
       this.switchComponent(msg);
+      this.sendMsg(new MessageConfirmOrder('Random', 5, 'Om te testen', true));
     });
   }
 
@@ -46,9 +47,8 @@ export class UnitsComponent implements OnInit {
   sendMsg(msg: object) {
     console.log('new msg from client to web');
     let message = new EncapsulatingMessage(null);
-    let obj = new MessageConfirmOrder('-1', -1, 'No, Not accepting you piece of shit', false);
-    message.setMessageType = obj.constructor.name;
-    message.setMessageData = JSON.stringify(obj);
+    message.setMessageType = msg.constructor.name;
+    message.setMessageData = JSON.stringify(msg);
     this.chatService.messages.next(message);
   }
 

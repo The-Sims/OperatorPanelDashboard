@@ -10,8 +10,7 @@ import {ErrorCardComponent} from '../../utilcomponents/error-card/error-card.com
     UnitRoutingModule
   ],
   declarations: [
-    UnitsComponent,
-    ErrorCardComponent
+    UnitsComponent
   ]
 })
 export class UnitModule { }

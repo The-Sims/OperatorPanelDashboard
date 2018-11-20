@@ -5,7 +5,7 @@ export class Incident {
   private _reinforcementInfo: string[];
   private _live: boolean;
   private _date_created: string;
-  private _date_updated: string;
+  private _modify_date: string;
 
 
   constructor(id: number, category: string, place: string, reinforcementInfo: string[], live: boolean, date_created: string, date_updated: string) {
@@ -15,7 +15,7 @@ export class Incident {
     this._reinforcementInfo = reinforcementInfo;
     this._live = live;
     this._date_created = date_created;
-    this._date_updated = date_updated;
+    this._modify_date = date_updated;
   }
 
 
@@ -54,7 +54,8 @@ export class Incident {
   get date_created(): string {
     return this._date_created;
   }
+
   get date_updated(): string {
-    return this._date_updated;
+    return this._modify_date;
   }
 }

@@ -13,20 +13,18 @@ import {Incident} from '../../../classes/incident';
   templateUrl: './incident-list.component.html',
   styleUrls: ['./incident-list.component.scss']
 })
-export class IncidentListComponent implements OnInit, AfterViewInit {
+export class IncidentListComponent {
   public tableWidget: any;
   public httpError: HttpErrorResponse = null;
   protected incidents: Incident[];
 
   constructor(private incidentService: IncidentsService) {
-  }
-
-  ngOnInit() {
     this.incidentService.getAll().subscribe(
       data => {
         console.log(data);
         this.incidents = data;
-        console.log(this.incidents, "Incidents");
+        console.log(this.incidents, 'Incidents');
+        this.initDatatable();
       }, error => {
         this.httpError = error;
         console.error('Couldn\'t connect to the rest server', error);
@@ -34,14 +32,26 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {
-    this.initDatatable();
-  }
   protected initDatatable(): void {
     const table: any = $('#datatable');
     this.tableWidget = table.DataTable({
+      data: this.incidentsToTableArray(this.incidents),
       select: true
     });
+  }
+
+  incidentsToTableArray(incidents: Incident[]) {
+    let dataSet = [];
+    for (let incident of incidents) {
+      dataSet.push(
+        [
+          incident.id,
+          incident.category,
+          incident.date_updated,
+          incident.live ? 'Ja' : 'Nee'
+        ]);
+    }
+    return dataSet;
   }
 
 }

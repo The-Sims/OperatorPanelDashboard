@@ -21,9 +21,10 @@ export class IncidentListComponent {
   constructor(private incidentService: IncidentsService) {
     this.incidentService.getAll().subscribe(
       data => {
-        console.log(data);
-        this.incidents = data;
-        console.log(this.incidents, 'Incidents');
+        this.incidents = [];
+        for (let row of data) {
+          this.incidents.push(Incident.fromJSON(row));
+        }
         this.initDatatable();
       }, error => {
         this.httpError = error;

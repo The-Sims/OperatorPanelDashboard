@@ -8,14 +8,14 @@ export class Incident {
   private _modify_date: string;
 
 
-  constructor(id: number, category: string, place: string, reinforcementInfo: string[], live: boolean, date_created: string, date_updated: string) {
-    this._id = id;
-    this._category = category;
-    this._place = place;
-    this._reinforcementInfo = reinforcementInfo;
-    this._live = live;
-    this._date_created = date_created;
-    this._modify_date = date_updated;
+  /*constructor(obj) {
+    if (obj != null) {
+      for (var prop in obj) this[prop] = obj[prop];
+    }
+  }*/
+
+  static fromJSON(data: any) {
+    return Object.assign(new this, data);
   }
 
 
@@ -57,5 +57,22 @@ export class Incident {
 
   get date_updated(): string {
     return this._modify_date;
+  }
+
+
+  set id(value: number) {
+    this._id = value;
+  }
+
+  set live(value: boolean) {
+    this._live = value;
+  }
+
+  set date_created(value: string) {
+    this._date_created = value;
+  }
+
+  set modify_date(value: string) {
+    this._modify_date = value;
   }
 }

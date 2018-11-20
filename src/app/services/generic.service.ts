@@ -1,6 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ServiceEnum} from '../enums/serviceEnum';
+import {Incident} from '../classes/incident';
+import 'rxjs-compat/add/operator/map';
+import {map} from 'rxjs/operators';
 
 
 export class GenericService<T> {

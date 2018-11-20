@@ -60,7 +60,11 @@ export const routes: Routes = [
       },
       {
         path: 'incident',
-        loadChildren: './views/incident/incident.module#UnitModule'
+        loadChildren: './views/incident/incident.module#IncidentModule'
+      },
+      {
+        path: 'units',
+        loadChildren: './views/unit/unit.module#UnitModule'
       },
       {
         path: 'base',

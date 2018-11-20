@@ -28,6 +28,15 @@ export const navItems = [
   },
   {
     title: true,
+    name: 'Units'
+  },
+  {
+    name: 'Unit list',
+    url: '/units/list',
+    icon: 'icon-drop'
+  },
+  {
+    title: true,
     name: 'Components'
   },
   {

@@ -7,14 +7,14 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Incident'
+      title: 'Units'
     },
     children: [
       {
         path: 'list',
         component: UnitsComponent,
         data: {
-          title: 'Incident list'
+          title: 'Units list'
         }
       },
     ]

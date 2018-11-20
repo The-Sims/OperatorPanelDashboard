@@ -15,7 +15,7 @@ import {MessageOrder} from '../../../classes/messages/MessageOrder';
 @Component({
   selector: 'app-incident-list',
   templateUrl: './units.component.html',
-  styleUrls: ['./incident-list.component.scss']
+  styleUrls: ['./unit.component.scss']
 })
 export class UnitsComponent implements OnInit {
   public tableWidget: any;

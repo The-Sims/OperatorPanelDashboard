@@ -11,9 +11,17 @@
           <th>Categorie</th>
           <th>Date</th>
           <th>Live</th>
+          <th>Acties</th>
         </tr>
         </thead>
         <tbody>
+        <tr *ngFor="let incident of incidents">
+          <td>{{incident.category}}</td>
+          <td>{{incident.category}}</td>
+          <td>{{incident.category}}</td>
+          <td>{{incident.live ? "Ja" : "Nee"}}</td>
+          <td><a routerLink="/incident/detail/{{incident.id}}">Detail</a></td>
+        </tr>
         </tbody>
       </table>
     </div>

@@ -13,7 +13,7 @@ import {Incident} from '../../../classes/incident';
   templateUrl: './incident-list.component.html',
   styleUrls: ['./incident-list.component.scss']
 })
-export class IncidentListComponent {
+export class IncidentListComponent implements AfterViewInit {
   public tableWidget: any;
   public httpError: HttpErrorResponse = null;
   protected incidents: Incident[];
@@ -25,7 +25,8 @@ export class IncidentListComponent {
         for (let row of data) {
           this.incidents.push(Incident.fromJSON(row));
         }
-        this.initDatatable();
+        console.log(this.incidents, 'Incidenten');
+        //this.initDatatable();
       }, error => {
         this.httpError = error;
         console.error('Couldn\'t connect to the rest server', error);
@@ -33,10 +34,22 @@ export class IncidentListComponent {
     );
   }
 
+  ngAfterViewInit() {
+    this.reInitDatatable();
+  }
+
+  private reInitDatatable(): void {
+    if (this.tableWidget) {
+      this.tableWidget.destroy();
+      this.tableWidget = null;
+    }
+    setTimeout(() => this.initDatatable(), 0);
+  }
+
   protected initDatatable(): void {
     const table: any = $('#datatable');
     this.tableWidget = table.DataTable({
-      data: this.incidentsToTableArray(this.incidents),
+      //data: this.incidentsToTableArray(this.incidents),
       select: true
     });
   }
@@ -49,7 +62,8 @@ export class IncidentListComponent {
           incident.id,
           incident.category,
           incident.date_updated,
-          incident.live ? 'Ja' : 'Nee'
+          incident.live ? 'Ja' : 'Nee',
+          '<'
         ]);
     }
     return dataSet;

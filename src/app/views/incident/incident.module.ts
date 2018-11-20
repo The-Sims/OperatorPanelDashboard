@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {IncidentRoutingModule} from './incident-routing.module';
 import {IncidentListComponent} from './incident-list/incident-list.component';
 import {ErrorCardComponent} from '../../utilcomponents/error-card/error-card.component';
+import { IncidentDetailComponent } from './incident-detail/incident-detail.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {ErrorCardComponent} from '../../utilcomponents/error-card/error-card.com
   ],
   declarations: [
     IncidentListComponent,
-    ErrorCardComponent
+    ErrorCardComponent,
+    IncidentDetailComponent
   ]
 })
 export class IncidentModule { }

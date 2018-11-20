@@ -61,7 +61,7 @@ export class IncidentListComponent implements AfterViewInit {
         [
           incident.id,
           incident.category,
-          incident.date_updated,
+          incident.modify_date,
           incident.live ? 'Ja' : 'Nee',
           '<'
         ]);

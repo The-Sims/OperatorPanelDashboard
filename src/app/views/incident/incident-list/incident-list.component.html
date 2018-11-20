@@ -8,23 +8,17 @@
         <thead>
         <tr>
           <th>Name</th>
-          <th>Description</th>
+          <th>Categorie</th>
           <th>Date</th>
-          <th>Origin</th>
+          <th>Live</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>Bram</td>
-          <td>bramkempen@gmail.com</td>
-          <td>www.google.nl</td>
-          <td>Twitter</td>
-        </tr>
-        <tr>
-          <td>Tom</td>
-          <td>bramkempen@gmail.com</td>
-          <td>www.google.nl</td>
-          <td>Twitter</td>
+        <tr *ngFor="let incident of incidents">
+          <td>{{incident.category}}</td>
+          <td>{{incident.category}}</td>
+          <td>{{incident.category}}</td>
+          <td>{{incident.live ? "Ja" : "Nee"}}</td>
         </tr>
         </tbody>
       </table>

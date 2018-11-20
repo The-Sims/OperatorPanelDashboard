@@ -1,4 +1,4 @@
-enum ServiceEnum {
+export enum ServiceEnum {
   ALL = 'all',
   EDIT = 'edit',
   SAVE = 'save',

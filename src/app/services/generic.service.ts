@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ServiceEnum} from '../enums/serviceEnum';
 
 
 export class GenericService<T> {
@@ -14,7 +15,8 @@ export class GenericService<T> {
   };
 
   constructor(protected http: HttpClient) {
-    this.url = 'http://localhost:8095/SIMS/';
+    // this.url = 'http://localhost:8095/SIMS/';
+    this.url = 'http://145.93.68.158:8094/';
   }
 
   protected getUrl(): string {

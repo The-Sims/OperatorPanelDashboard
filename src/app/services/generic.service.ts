@@ -19,7 +19,7 @@ export class GenericService<T> {
 
   constructor(protected http: HttpClient) {
     // this.url = 'http://localhost:8095/SIMS/';
-    this.url = 'http://145.93.68.158:8094/';
+    this.url = 'http://145.93.68.135:8094/';
   }
 
   protected getUrl(): string {

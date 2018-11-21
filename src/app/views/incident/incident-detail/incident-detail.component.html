@@ -6,25 +6,31 @@
     <div class="card-body">
       <div class="container mt-5 mb-5">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-lg-5">
             <h4>Beschrijving</h4>
-            <ul class="timeline">
+            <ul *ngIf="incident.incidentDescription.length > 0" class="timeline">
               <li *ngFor="let row of incident.incidentDescription">
                 <a target="_blank" href="#">{{row}}</a>
                 <a href="#!" class="float-right">21 March, 2014</a>
                 <p>{{row}}</p>
               </li>
             </ul>
+            <p *ngIf="incident.incidentDescription.length === 0">
+              Geen informatie gevonden
+            </p>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-lg-5 offset-lg-2">
             <h4>Versterkte informatie</h4>
-            <ul class="timeline">
+            <ul *ngIf="incident.reinforcementInfo.length > 0" class="timeline">
               <li *ngFor="let row of incident.reinforcementInfo">
                 <a target="_blank" href="#">{{row}}</a>
                 <a href="#" class="float-right">21 March, 2014</a>
                 <p>{{row}}</p>
               </li>
             </ul>
+            <p *ngIf="incident.reinforcementInfo.length === 0">
+              Geen informatie gevonden
+            </p>
           </div>
         </div>
       </div>

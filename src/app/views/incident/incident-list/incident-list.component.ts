@@ -26,6 +26,8 @@ export class IncidentListComponent implements AfterViewInit {
           this.incidents.push(Incident.fromJSON(row));
         }
         console.log(this.incidents, 'Incidenten');
+
+        this.reInitDatatable();
         //this.initDatatable();
       }, error => {
         this.httpError = error;
@@ -35,7 +37,7 @@ export class IncidentListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.reInitDatatable();
+    //this.reInitDatatable();
   }
 
   private reInitDatatable(): void {

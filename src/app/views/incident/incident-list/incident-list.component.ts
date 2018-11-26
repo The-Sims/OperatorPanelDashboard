@@ -24,6 +24,12 @@ export class IncidentListComponent implements AfterViewInit {
         this.incidents = [];
         for (let row of data) {
           row.create_date = new Date(row.create_date);
+          for (let incidentDescription of row.incidentDescription){
+            incidentDescription.date = new Date(incidentDescription.date);
+          }
+          for (let reinforcementInfo of row.reinforcementInfo){
+            reinforcementInfo.date = new Date(reinforcementInfo.date);
+          }
           this.incidents.push(Incident.fromJSON(row));
         }
         console.log(this.incidents, 'Incidenten');

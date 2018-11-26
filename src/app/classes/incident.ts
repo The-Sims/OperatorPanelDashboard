@@ -1,9 +1,11 @@
+import {IncidentDescription} from './incidentDescription';
+
 export class Incident {
   private _id: number;
   private _category: string;
   private _place: string;
-  private _reinforcementInfo: string[];
-  private _incidentDescription: string[];
+  private _reinforcementInfo: IncidentDescription[];
+  private _incidentDescription: IncidentDescription[];
   private _live: boolean;
   private _create_date: Date;
   private _modify_date: string;
@@ -44,19 +46,20 @@ export class Incident {
     this._place = value;
   }
 
-  get reinforcementInfo(): string[] {
+
+  get reinforcementInfo(): IncidentDescription[] {
     return this._reinforcementInfo;
   }
 
-  set reinforcementInfo(value: string[]) {
+  set reinforcementInfo(value: IncidentDescription[]) {
     this._reinforcementInfo = value;
   }
 
-  get incidentDescription(): string[] {
+  get incidentDescription(): IncidentDescription[] {
     return this._incidentDescription;
   }
 
-  set incidentDescription(value: string[]) {
+  set incidentDescription(value: IncidentDescription[]) {
     this._incidentDescription = value;
   }
 

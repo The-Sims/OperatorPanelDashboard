@@ -1,5 +1,9 @@
 <div class="animated fadeIn">
-  <div *ngIf="httpError == null" class="card">
+  <div *ngIf="httpError == null && incidents == null">
+    <i class="fa fa-cog fa-spin fa-5x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="httpError == null && incidents != null" class="card">
     <div class="card-header">
       Incoming messages
     </div>

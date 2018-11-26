@@ -24,6 +24,13 @@ export class IncidentDetailComponent implements OnInit {
         this.id = params['id'];
         this.incidentService.getById(this.id).subscribe(
           data => {
+            data.create_date = new Date(data.create_date);
+            for (let incidentDescription of data.incidentDescription){
+              incidentDescription.date = new Date(incidentDescription.date);
+            }
+            for (let reinforcementInfo of data.reinforcementInfo){
+              reinforcementInfo.date = new Date(reinforcementInfo.date);
+            }
             this.incident = Incident.fromJSON(data);
             console.log(this.incident, 'Incident');
           }

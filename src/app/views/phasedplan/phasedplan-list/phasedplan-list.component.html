@@ -1,0 +1,36 @@
+<div class="animated fadeIn">
+  <div *ngIf="httpError == null && incidents == null">
+    <i class="fa fa-cog fa-spin fa-5x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="httpError == null && incidents != null" class="card">
+    <div class="card-header">
+      Incoming messages
+    </div>
+    <div class="card-body">
+      <table id="datatable" class="table table-striped table-bordered table-sm row-border hover" datatable>
+        <thead>
+        <tr>
+          <th>Categorie</th>
+          <th>Plaats</th>
+          <th>Datum</th>
+          <th>Live</th>
+          <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let incident of incidents">
+          <td>{{incident.category}}</td>
+          <td>{{incident.place}}</td>
+          <td>{{incident.create_date.getDay()}}-{{incident.create_date.getMonth()}}-{{incident.create_date.getFullYear()}}</td>
+          <td>{{incident.live ? "Ja" : "Nee"}}</td>
+          <td><a routerLink="/incident/detail/{{incident.id}}">Detail</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="httpError != null">
+    <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
+  </div>
+</div>

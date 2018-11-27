@@ -28,6 +28,15 @@ export const navItems = [
   },
   {
     title: true,
+    name: 'Phasedplan'
+  },
+  {
+    name: 'Phasedplan',
+    url: '/phasedplan/list',
+    icon: 'icon-drop'
+  },
+  {
+    title: true,
     name: 'Components'
   },
   {

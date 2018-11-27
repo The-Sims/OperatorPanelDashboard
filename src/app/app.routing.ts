@@ -63,6 +63,10 @@ export const routes: Routes = [
         loadChildren: './views/incident/incident.module#IncidentModule'
       },
       {
+        path: 'phasedplan',
+        loadChildren: './views/phasedplan/phasedplan.module#PhasedplanModule'
+      },
+      {
         path: 'base',
         loadChildren: './views/base/base.module#BaseModule'
       },

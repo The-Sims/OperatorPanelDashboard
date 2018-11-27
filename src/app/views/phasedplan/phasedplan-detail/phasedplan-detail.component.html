@@ -1,0 +1,42 @@
+<div class="animated fadeIn">
+  <div *ngIf="httpError == null && incident != null" class="card">
+    <div class="card-header">
+      Detail {{incident.category}}
+    </div>
+    <div class="card-body">
+      <div class="container mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-6 col-lg-5">
+            <h4>Beschrijving</h4>
+            <ul *ngIf="incident.incidentDescription.length > 0" class="timeline">
+              <li *ngFor="let row of incident.incidentDescription">
+                <a target="_blank" href="#">{{row.message}}</a>
+                <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}} {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
+                <p>{{row.message}}</p>
+              </li>
+            </ul>
+            <p *ngIf="incident.incidentDescription.length === 0">
+              Geen informatie gevonden
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-5 offset-lg-2">
+            <h4>Versterkte informatie</h4>
+            <ul *ngIf="incident.reinforcementInfo.length > 0" class="timeline">
+              <li *ngFor="let row of incident.reinforcementInfo">
+                <a target="_blank" href="#">{{row.message}}</a>
+                <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}} {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
+                <p>{{row.message}}</p>
+              </li>
+            </ul>
+            <p *ngIf="incident.reinforcementInfo.length === 0">
+              Geen informatie gevonden
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="httpError != null">
+    <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
+  </div>
+</div>

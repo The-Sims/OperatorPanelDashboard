@@ -23,9 +23,18 @@ export class IncidentListComponent implements AfterViewInit {
       data => {
         this.incidents = [];
         for (let row of data) {
+          row.create_date = new Date(row.create_date);
+          for (let incidentDescription of row.incidentDescription){
+            incidentDescription.date = new Date(incidentDescription.date);
+          }
+          for (let reinforcementInfo of row.reinforcementInfo){
+            reinforcementInfo.date = new Date(reinforcementInfo.date);
+          }
           this.incidents.push(Incident.fromJSON(row));
         }
         console.log(this.incidents, 'Incidenten');
+
+        this.reInitDatatable();
         //this.initDatatable();
       }, error => {
         this.httpError = error;
@@ -35,7 +44,7 @@ export class IncidentListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.reInitDatatable();
+    //this.reInitDatatable();
   }
 
   private reInitDatatable(): void {
@@ -61,7 +70,7 @@ export class IncidentListComponent implements AfterViewInit {
         [
           incident.id,
           incident.category,
-          incident.date_updated,
+          incident.modify_date,
           incident.live ? 'Ja' : 'Nee',
           '<'
         ]);

@@ -2,10 +2,10 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
-import {IncidentsService} from '../../../services/incidents.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ServiceEnum} from '../../../enums/serviceEnum';
-import {Incident} from '../../../classes/incident';
+import {PhasedplanService} from '../../../services/phasedplan.service';
+import {Phasedplan} from '../../../classes/phasedplan';
 
 
 @Component({
@@ -13,38 +13,26 @@ import {Incident} from '../../../classes/incident';
   templateUrl: './phasedplan-list.component.html',
   styleUrls: ['./phasedplan-list.component.scss']
 })
-export class PhasedplanListComponent implements AfterViewInit {
+export class PhasedplanListComponent {
   public tableWidget: any;
   public httpError: HttpErrorResponse = null;
-  protected incidents: Incident[];
+  protected phasedplans: Phasedplan[];
 
-  constructor(private incidentService: IncidentsService) {
-    this.incidentService.getAll().subscribe(
+  constructor(private phasedPlanService: PhasedplanService) {
+    this.phasedPlanService.getAll().subscribe(
       data => {
-        this.incidents = [];
+        this.phasedplans = [];
         for (let row of data) {
-          row.create_date = new Date(row.create_date);
-          for (let incidentDescription of row.incidentDescription){
-            incidentDescription.date = new Date(incidentDescription.date);
-          }
-          for (let reinforcementInfo of row.reinforcementInfo){
-            reinforcementInfo.date = new Date(reinforcementInfo.date);
-          }
-          this.incidents.push(Incident.fromJSON(row));
+          this.phasedplans.push(Phasedplan.fromJSON(row));
         }
-        console.log(this.incidents, 'Incidenten');
+        console.log(this.phasedplans, 'Stappenplannen');
 
         this.reInitDatatable();
-        //this.initDatatable();
       }, error => {
         this.httpError = error;
         console.error('Couldn\'t connect to the rest server', error);
       }
     );
-  }
-
-  ngAfterViewInit() {
-    //this.reInitDatatable();
   }
 
   private reInitDatatable(): void {
@@ -58,24 +46,7 @@ export class PhasedplanListComponent implements AfterViewInit {
   protected initDatatable(): void {
     const table: any = $('#datatable');
     this.tableWidget = table.DataTable({
-      //data: this.incidentsToTableArray(this.incidents),
       select: true
     });
   }
-
-  incidentsToTableArray(incidents: Incident[]) {
-    let dataSet = [];
-    for (let incident of incidents) {
-      dataSet.push(
-        [
-          incident.id,
-          incident.category,
-          incident.modify_date,
-          incident.live ? 'Ja' : 'Nee',
-          '<'
-        ]);
-    }
-    return dataSet;
-  }
-
 }

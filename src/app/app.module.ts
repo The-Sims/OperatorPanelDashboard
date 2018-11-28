@@ -48,6 +48,7 @@ import {IncidentsService} from './services/incidents.service';
 import {ErrorCardComponent} from './utilcomponents/error-card/error-card.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginOperatorService} from './services/login-operator.service';
+import {PhasedplanService} from './services/phasedplan.service';
 
 @NgModule({
   imports: [
@@ -77,6 +78,6 @@ import {LoginOperatorService} from './services/login-operator.service';
     ServicesComponent,
   ],
   bootstrap: [ AppComponent ],
-  providers: [IncidentsService, LoginOperatorService]
+  providers: [IncidentsService, LoginOperatorService, PhasedplanService]
 })
 export class AppModule { }

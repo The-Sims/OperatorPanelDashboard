@@ -4,6 +4,7 @@ import {PhasedplanRoutingModule} from './phasedplan-routing.module';
 import {PhasedplanListComponent} from './phasedplan-list/phasedplan-list.component';
 import {PhasedplanDetailComponent} from './phasedplan-detail/phasedplan-detail.component';
 import {UtilModule} from '../../UitlModule';
+import {PhasedplanAddComponent} from './phasedplan-add/phasedplan-add.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import {UtilModule} from '../../UitlModule';
   ],
   declarations: [
     PhasedplanListComponent,
-    PhasedplanDetailComponent
+    PhasedplanDetailComponent,
+    PhasedplanAddComponent
   ]
 })
 export class PhasedplanModule { }

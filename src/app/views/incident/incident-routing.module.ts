@@ -12,7 +12,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'list',
+        path: '',
         component: IncidentListComponent,
         data: {
           title: 'Incident list'

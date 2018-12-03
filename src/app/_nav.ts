@@ -23,7 +23,7 @@ export const navItems = [
   },
   {
     name: 'Incidents',
-    url: '/incident/list',
+    url: '/incident',
     icon: 'icon-drop'
   },
   {
@@ -32,7 +32,7 @@ export const navItems = [
   },
   {
     name: 'Phasedplan',
-    url: '/phasedplan/list',
+    url: '/phasedplan',
     icon: 'icon-drop'
   },
   {

@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Incident} from '../../../classes/incident';
 import {IncidentsService} from '../../../services/incidents.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Phasedplan} from '../../../classes/phasedplan';
+import {PhasedplanService} from '../../../services/phasedplan.service';
 
 @Component({
   selector: 'app-phasedplan-detail',
@@ -12,27 +14,20 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class PhasedplanDetailComponent implements OnInit {
 
   private id: number;
-  protected incident: Incident = null;
+  protected phasedplan: Phasedplan = null;
   public httpError: HttpErrorResponse = null;
 
-  constructor(private incidentService: IncidentsService, private route: ActivatedRoute) {
+  constructor(private phasedplanService: PhasedplanService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       params => {
         this.id = params['id'];
-        this.incidentService.getById(this.id).subscribe(
+        this.phasedplanService.getById(this.id).subscribe(
           data => {
-            data.create_date = new Date(data.create_date);
-            for (let incidentDescription of data.incidentDescription){
-              incidentDescription.date = new Date(incidentDescription.date);
-            }
-            for (let reinforcementInfo of data.reinforcementInfo){
-              reinforcementInfo.date = new Date(reinforcementInfo.date);
-            }
-            this.incident = Incident.fromJSON(data);
-            console.log(this.incident, 'Incident');
+            this.phasedplan = Phasedplan.fromJSON(data);
+            console.log(this.phasedplan, 'Stappenplan');
           }
         );
       }

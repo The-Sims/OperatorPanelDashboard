@@ -1,14 +1,22 @@
 import {NgModule} from '@angular/core';
 import {ErrorCardComponent} from './utilcomponents/error-card/error-card.component';
+import {PacmanComponent} from './utilcomponents/pacman/pacman.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
-    ErrorCardComponent
+    ErrorCardComponent,
+    PacmanComponent,
   ],
   exports: [
-    ErrorCardComponent
+    ErrorCardComponent,
+    PacmanComponent,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 

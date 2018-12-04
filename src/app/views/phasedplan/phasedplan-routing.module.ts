@@ -20,6 +20,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'list',
+        component: PhasedplanListComponent,
+        data: {
+          title: 'Phasedplan list'
+        }
+      },
+      {
         path: 'detail/:id',
         component: PhasedplanDetailComponent,
         data: {

@@ -33,7 +33,19 @@ export const navItems = [
   {
     name: 'Phasedplan',
     url: '/phasedplan',
-    icon: 'icon-drop'
+    icon: 'icon-drop',
+    children: [
+      {
+        name: 'All',
+        url: '/phasedplan/list',
+        icon: 'icon-drop'
+      },
+      {
+        name: 'Add',
+        url: '/phasedplan/add',
+        icon: 'icon-drop'
+      },
+    ],
   },
   {
     title: true,

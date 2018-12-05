@@ -3,7 +3,7 @@ import {PhasedplanTask} from './task';
 export class Phasedplan {
   private _phasedPlanId: Number;
   private _name: String;
-  private _tasks: PhasedplanTask[];
+  private _tasks: PhasedplanTask[] = [];
 
   static fromJSON(data: any) {
     return Object.assign(new this, data);

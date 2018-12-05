@@ -9,34 +9,56 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="Name">Name</label>
           <div class="col-md-9">
-            <input ngModel type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name...">
+            <input [(ngModel)]="phasedplanName" type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name...">
           </div>
         </div>
 
         <h3>Stappen</h3>
-        <div id="field">
-          <div id="field0">
-            <!-- Text input-->
-            <div class="form-group row">
-              <label class="col-md-3 col-control-label" for="action_id">Task name</label>
-              <div class="col-md-9">
-                <input ngModel id="action_id" name="task_name[]" type="text" placeholder="Task name" class="form-control">
-              </div>
+        <div *ngFor="let row of fieldArray; let i = index">
+          <!-- Text input-->
+          <div class="form-group row">
+            <label class="col-md-3 col-control-label" for="action_id">Task name</label>
+            <div class="col-md-9">
+              <input [(ngModel)]="row.name" name="stap_{{i}}_{{row.name}}" id="action_id" type="text" placeholder="Task name"
+                     class="form-control">
             </div>
-            <!-- Text input-->
-            <div class="form-group row">
-              <label class="col-md-3 col-control-label" for="action_name">Task description</label>
-              <div class="col-md-9">
-                <input ngModel id="action_name" name="task_description[]" type="text" placeholder="Task description"
-                       class="form-control">
-              </div>
+          </div>
+          <!-- Text input-->
+          <div class="form-group row">
+            <label class="col-md-3 col-control-label" for="action_name">Task description</label>
+            <div class="col-md-9">
+              <input [(ngModel)]="row.description" name="stap_{{i}}_{{row.description}}" id="action_name" type="text"
+                     placeholder="Task description"
+                     class="form-control">
             </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-9 offset-md-3">
+              <button type="button" (click)="deleteFieldValue(i)" class="btn btn-danger">Remove</button>
+            </div>
+          </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group row">
+          <label class="col-md-3 col-control-label" for="newAttributeName">Task name</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="newAttribute.name" name="newAttributeName" id="newAttributeName" type="text" placeholder="Task name"
+                   class="form-control">
+          </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group row">
+          <label class="col-md-3 col-control-label" for="newAttributeDescription">Task description</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="newAttribute.description" name="newAttributeDescription" id="newAttributeDescription" type="text"
+                   placeholder="Task description"
+                   class="form-control">
           </div>
         </div>
         <!-- Button -->
         <div class="form-group">
           <div class="col-md-9 offset-md-3">
-            <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
+            <button type="button" id="add-more" (click)="addTask()" name="add-more" class="btn btn-primary">Add More</button>
           </div>
         </div>
 

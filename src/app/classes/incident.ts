@@ -1,11 +1,14 @@
 import {IncidentDescription} from './incidentDescription';
+import {IncidentCategory} from './incidentCategory';
+import {IncidentTip} from './incidentTip';
 
 export class Incident {
   private _id: number;
-  private _category: string;
+  private _category: IncidentCategory;
   private _place: string;
   private _reinforcementInfo: IncidentDescription[];
   private _incidentDescription: IncidentDescription[];
+  private _tips: IncidentTip[];
   private _live: boolean;
   private _create_date: Date;
   private _modify_date: string;
@@ -21,6 +24,13 @@ export class Incident {
     return Object.assign(new this, data);
   }
 
+  get tips(): IncidentTip[] {
+    return this._tips;
+  }
+
+  set tips(value: IncidentTip[]) {
+    this._tips = value;
+  }
 
   get id(): number {
     return this._id;
@@ -30,11 +40,11 @@ export class Incident {
     this._id = value;
   }
 
-  get category(): string {
+  get category(): IncidentCategory {
     return this._category;
   }
 
-  set category(value: string) {
+  set category(value: IncidentCategory) {
     this._category = value;
   }
 

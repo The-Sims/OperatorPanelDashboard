@@ -18,7 +18,7 @@ export class GenericService<T> {
   };
 
   constructor(protected http: HttpClient) {
-    this.url = 'http://145.93.92.196:8094/';
+    this.url = 'http://145.93.68.18:8094/';
     // this.url = 'http://145.93.67.225:8094/';
   }
 

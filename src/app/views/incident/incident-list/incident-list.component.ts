@@ -21,6 +21,7 @@ export class IncidentListComponent implements AfterViewInit {
   constructor(private incidentService: IncidentsService) {
     this.incidentService.getAll().subscribe(
       data => {
+        console.log(data, "Data");
         this.incidents = [];
         for (let row of data) {
           row.create_date = new Date(row.create_date);

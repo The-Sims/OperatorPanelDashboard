@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
   <div *ngIf="httpError == null && incident != null" class="card">
     <div class="card-header">
-      Detail {{incident.category}}
+      Detail {{incident.category.category}}
     </div>
     <div class="card-body">
       <div class="container mt-5 mb-5">
@@ -38,5 +38,30 @@
   </div>
   <div *ngIf="httpError != null">
     <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
+  </div>
+
+  <div *ngIf="httpError == null && incident != null" class="card">
+    <div class="card-header">
+      Tips
+    </div>
+    <div class="card-body">
+      <div class="container mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <h4>Tips</h4>
+            <ul *ngIf="incident.tips.length > 0" class="timeline">
+              <li *ngFor="let row of incident.tips">
+                <a target="_blank" href="#">{{row.message}}</a>
+                <a href="#!" class="float-right">11-12-2018 12:55</a>
+                <p><a href="#" class="btn btn-success">Accept</a><a href="#" class="btn btn-danger">Decline</a></p>
+              </li>
+            </ul>
+            <p *ngIf="incident.tips.length === 0">
+              Geen informatie gevonden
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

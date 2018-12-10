@@ -32,6 +32,12 @@
               Geen informatie gevonden
             </p>
           </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <a (click)="confirm(incident)" class="btn btn-success">Accept</a><a (click)="close(incident)" class="btn btn-danger">Decline</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,10 +56,10 @@
           <div class="col-md-6 col-lg-6">
             <h4>Tips</h4>
             <ul *ngIf="incident.tips.length > 0" class="timeline">
-              <li *ngFor="let row of incident.tips">
-                <a target="_blank" href="#">{{row.message}}</a>
+              <li *ngFor="let tip of incident.tips">
+                <a target="_blank" href="#">{{tip.message}}</a>
                 <a href="#!" class="float-right">11-12-2018 12:55</a>
-                <p><a href="#" class="btn btn-success">Accept</a><a href="#" class="btn btn-danger">Decline</a></p>
+                <p><a (click)="confirmTip(tip)" class="btn btn-success">Accept</a><a class="btn btn-danger">Decline</a></p>
               </li>
             </ul>
             <p *ngIf="incident.tips.length === 0">

@@ -59,7 +59,7 @@
               <li *ngFor="let tip of incident.tips">
                 <a target="_blank" href="#">{{tip.message}}</a>
                 <a href="#!" class="float-right">11-12-2018 12:55</a>
-                <p><a (click)="confirmTip(tip)" class="btn btn-success">Accept</a><a class="btn btn-danger">Decline</a></p>
+                <p *ngIf="tip.confirmed == false"><a (click)="confirmTip(tip)" class="btn btn-success">Accept</a><a (click)="closeTip(tip)" class="btn btn-danger">Decline</a></p>
               </li>
             </ul>
             <p *ngIf="incident.tips.length === 0">

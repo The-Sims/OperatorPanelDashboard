@@ -20,4 +20,7 @@ export class IncidentsService extends GenericService<Incident> {
   confirmTip(id: number): Observable<Incident> {
     return this.http.get<Incident>(this.getUrl() + 'confirmTip/' + id);
   }
+  closeTip(id: number): Observable<Incident> {
+    return this.http.get<Incident>(this.getUrl() + 'deleteTip/' + id);
+  }
 }

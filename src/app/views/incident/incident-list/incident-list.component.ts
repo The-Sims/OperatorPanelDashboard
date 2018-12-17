@@ -6,6 +6,9 @@ import {IncidentsService} from '../../../services/incidents.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ServiceEnum} from '../../../enums/serviceEnum';
 import {Incident} from '../../../classes/incident';
+import {AnalyserwebsocksService} from '../../../services/websockets/analyserwebsocks.service';
+import {MessageUpdateIncident} from '../../../classes/messages/analysermessages/MessageUpdateIncident';
+import {MessageUpdateIncidents} from '../../../classes/messages/analysermessages/MessageUpdateIncidents';
 
 
 @Component({
@@ -18,21 +21,26 @@ export class IncidentListComponent implements AfterViewInit {
   public httpError: HttpErrorResponse = null;
   protected incidents: Incident[];
 
-  constructor(private incidentService: IncidentsService) {
+  constructor(private incidentService: IncidentsService, private analyser: AnalyserwebsocksService) {
+      this.analyser.messages.subscribe(msg => {
+          console.log(msg.getMessageType);
+          console.log(msg.getMessageData);
+          this.switchComponent(msg);
+      });
     this.incidentService.getAll().subscribe(
       data => {
         console.log(data, "Data");
         this.incidents = [];
-        for (let row of data) {
-          row.create_date = new Date(row.create_date);
-          for (let incidentDescription of row.incidentDescription){
-            incidentDescription.date = new Date(incidentDescription.date);
-          }
-          for (let reinforcementInfo of row.reinforcementInfo){
-            reinforcementInfo.date = new Date(reinforcementInfo.date);
-          }
-          this.incidents.push(Incident.fromJSON(row));
-        }
+        // for (let row of data) {
+        //   row.create_date = new Date(row.create_date);
+        //   for (let incidentDescription of row.incidentDescription){
+        //     incidentDescription.date = new Date(incidentDescription.date);
+        //   }
+        //   for (let reinforcementInfo of row.reinforcementInfo){
+        //     reinforcementInfo.date = new Date(reinforcementInfo.date);
+        //   }
+        //   this.incidents.push(Incident.fromJSON(row));
+        // }
         console.log(this.incidents, 'Incidenten');
 
         this.reInitDatatable();
@@ -43,6 +51,25 @@ export class IncidentListComponent implements AfterViewInit {
       }
     );
   }
+    switchComponent(msg) {
+        let message = null;
+        switch (msg.getMessageType) {
+            case 'public class communication.messages.sharedmessages.MessageUpdateIncident':
+                console.log('Me gotst an update incident');
+                message = new MessageUpdateIncident(JSON.parse(msg.getMessageData));
+                //doet niks
+                break;
+            case 'public class communication.messages.sharedmessages.MessageUpdateIncidents':
+                console.log('Me gotst an update incidents');
+                message = new MessageUpdateIncidents(JSON.parse(msg.getMessageData));
+                //TODO fix html (kan geen datum en 'live' niet lezen)
+                this.incidents = message.getIncidents;
+                break;
+            default:
+                console.log('rip');
+                break;
+        }
+    }
 
   ngAfterViewInit() {
     //this.reInitDatatable();

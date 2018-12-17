@@ -24,4 +24,11 @@ export class UnitwebsocksService {
       });
 
   }
+    sendMsg(msg: object) {
+        console.log('new msg from client to web')
+        let message = new EncapsulatingMessage(null);
+        message.setMessageType = msg.constructor.name;
+        message.setMessageData = JSON.stringify(msg);
+        this.messages.next(message);
+    }
 }

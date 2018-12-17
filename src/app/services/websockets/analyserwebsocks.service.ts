@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import {EncapsulatingMessage} from '../../classes/messages/EncapsulatingMessage';
 
 
-const CHAT_URL = 'ws:/145.93.113.127:8094/analyserserver/websocket/';
+const CHAT_URL = 'ws:/145.93.112.239:8090/analyserserver/websocket/';
 
 
 @Injectable({
@@ -24,4 +24,11 @@ export class AnalyserwebsocksService {
       });
 
   }
+    sendMsg(msg: object) {
+        console.log('new msg from client to web')
+        let message = new EncapsulatingMessage(null);
+        message.setMessageType = msg.constructor.name;
+        message.setMessageData = JSON.stringify(msg);
+        this.messages.next(message);
+    }
 }

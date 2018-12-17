@@ -48,6 +48,11 @@ import {IncidentsService} from './services/incidents.service';
 import {ErrorCardComponent} from './utilcomponents/error-card/error-card.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginOperatorService} from './services/login-operator.service';
+import {PhasedplanService} from './services/phasedplan.service';
+import { PacmanComponent } from './utilcomponents/pacman/pacman.component';
+import {UtilModule} from './UitlModule';
+import {UnitwebsocksService} from './services/websockets/unitwebsocks.service';
+import {AnalyserwebsocksService} from './services/websockets/analyserwebsocks.service';
 
 @NgModule({
   imports: [
@@ -64,8 +69,7 @@ import {LoginOperatorService} from './services/login-operator.service';
     TabsModule.forRoot(),
     ChartsModule,
     DataTablesModule,
-    FormsModule,
-    ReactiveFormsModule
+    UtilModule
   ],
   declarations: [
     AppComponent,
@@ -77,6 +81,6 @@ import {LoginOperatorService} from './services/login-operator.service';
     ServicesComponent,
   ],
   bootstrap: [ AppComponent ],
-  providers: [IncidentsService, LoginOperatorService]
+  providers: [IncidentsService, LoginOperatorService, PhasedplanService, UnitwebsocksService, AnalyserwebsocksService]
 })
 export class AppModule { }

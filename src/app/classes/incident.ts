@@ -1,33 +1,50 @@
+import {IncidentDescription} from './incidentDescription';
+import {IncidentCategory} from './incidentCategory';
+import {IncidentTip} from './incidentTip';
+
 export class Incident {
   private _id: number;
-  private _category: string;
+  private _category: IncidentCategory;
   private _place: string;
-  private _reinforcementInfo: string[];
+  private _reinforcementInfo: IncidentDescription[];
+  private _incidentDescription: IncidentDescription[];
+  private _tips: IncidentTip[];
   private _live: boolean;
-  private _date_created: string;
-  private _date_updated: string;
+  private _create_date: Date;
+  private _modify_date: string;
 
 
-  constructor(id: number, category: string, place: string, reinforcementInfo: string[], live: boolean, date_created: string, date_updated: string) {
-    this._id = id;
-    this._category = category;
-    this._place = place;
-    this._reinforcementInfo = reinforcementInfo;
-    this._live = live;
-    this._date_created = date_created;
-    this._date_updated = date_updated;
+  /*constructor(obj) {
+    if (obj != null) {
+      for (var prop in obj) this[prop] = obj[prop];
+    }
+  }*/
+
+  static fromJSON(data: any) {
+    return Object.assign(new this, data);
   }
 
+  get tips(): IncidentTip[] {
+    return this._tips;
+  }
+
+  set tips(value: IncidentTip[]) {
+    this._tips = value;
+  }
 
   get id(): number {
     return this._id;
   }
 
-  get category(): string {
+  set id(value: number) {
+    this._id = value;
+  }
+
+  get category(): IncidentCategory {
     return this._category;
   }
 
-  set category(value: string) {
+  set category(value: IncidentCategory) {
     this._category = value;
   }
 
@@ -39,22 +56,45 @@ export class Incident {
     this._place = value;
   }
 
-  get reinforcementInfo(): string[] {
+
+  get reinforcementInfo(): IncidentDescription[] {
     return this._reinforcementInfo;
   }
 
-  set reinforcementInfo(value: string[]) {
+  set reinforcementInfo(value: IncidentDescription[]) {
     this._reinforcementInfo = value;
+  }
+
+  get incidentDescription(): IncidentDescription[] {
+    return this._incidentDescription;
+  }
+
+  set incidentDescription(value: IncidentDescription[]) {
+    this._incidentDescription = value;
   }
 
   get live(): boolean {
     return this._live;
   }
 
-  get date_created(): string {
-    return this._date_created;
+  set live(value: boolean) {
+    this._live = value;
   }
-  get date_updated(): string {
-    return this._date_updated;
+
+
+  get create_date(): Date {
+    return this._create_date;
+  }
+
+  set create_date(value: Date) {
+    this._create_date = value;
+  }
+
+  get modify_date(): string {
+    return this._modify_date;
+  }
+
+  set modify_date(value: string) {
+    this._modify_date = value;
   }
 }

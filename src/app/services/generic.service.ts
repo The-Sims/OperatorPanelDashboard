@@ -1,6 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ServiceEnum} from '../enums/serviceEnum';
+import {Incident} from '../classes/incident';
+import 'rxjs-compat/add/operator/map';
+import {map} from 'rxjs/operators';
 
 
 export class GenericService<T> {
@@ -15,8 +18,8 @@ export class GenericService<T> {
   };
 
   constructor(protected http: HttpClient) {
-    // this.url = 'http://localhost:8095/SIMS/';
-    this.url = 'http://145.93.68.158:8094/';
+    this.url = 'http://192.168.0.196:8094/';
+    // this.url = 'http://145.93.67.225:8094/';
   }
 
   protected getUrl(): string {

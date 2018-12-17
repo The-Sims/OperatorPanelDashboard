@@ -23,17 +23,29 @@ export const navItems = [
   },
   {
     name: 'Incidents',
-    url: '/incident/list',
+    url: '/incident',
     icon: 'icon-drop'
   },
   {
     title: true,
-    name: 'Units'
+    name: 'Phasedplan'
   },
   {
-    name: 'Unit list',
-    url: '/units/list',
-    icon: 'icon-drop'
+    name: 'Phasedplan',
+    url: '/phasedplan',
+    icon: 'icon-drop',
+    children: [
+      {
+        name: 'All',
+        url: '/phasedplan/list',
+        icon: 'icon-drop'
+      },
+      {
+        name: 'Add',
+        url: '/phasedplan/add',
+        icon: 'icon-drop'
+      },
+    ],
   },
   {
     title: true,

@@ -1,0 +1,28 @@
+<div class="animated fadeIn">
+  <div *ngIf="httpError == null && phasedplan != null" class="card">
+    <div class="card-header">
+      Detail {{phasedplan.name}}
+    </div>
+    <div class="card-body">
+      <div class="container mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <h4>Taken</h4>
+            <ul *ngIf="phasedplan.tasks.length > 0" class="timeline">
+              <li *ngFor="let row of phasedplan.tasks">
+                <a target="_blank" href="#">{{row.name}}</a>
+                <p>{{row.description}}</p>
+              </li>
+            </ul>
+            <p *ngIf="phasedplan.tasks.length === 0">
+              Geen informatie gevonden
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="httpError != null">
+    <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
+  </div>
+</div>

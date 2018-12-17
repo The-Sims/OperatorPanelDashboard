@@ -5,13 +5,13 @@ import 'rxjs/add/operator/map';
 import {EncapsulatingMessage} from '../../classes/messages/EncapsulatingMessage';
 
 
-const CHAT_URL = 'ws:/145.93.113.127:8095/unitmanagerserver/websocket/';
+const CHAT_URL = 'ws:/145.93.113.127:8094/analyserserver/websocket/';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class AnalyserwebsocksService {
   public messages: Subject<EncapsulatingMessage>;
 
   constructor(wsService: WebsocketService) {

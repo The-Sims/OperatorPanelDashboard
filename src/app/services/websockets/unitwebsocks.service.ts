@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import {EncapsulatingMessage} from '../../classes/messages/EncapsulatingMessage';
 
 
-const CHAT_URL = 'ws:/145.93.113.127:8095/unitmanagerserver/websocket/';
+const CHAT_URL = 'ws:/145.93.112.122:8095/unitmanagerserver/websocket/';
 
 
 @Injectable({

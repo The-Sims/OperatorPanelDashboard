@@ -10,8 +10,8 @@ export class Incident {
   private _incidentDescription: IncidentDescription[];
   private _tips: IncidentTip[];
   private _live: boolean;
-  private _create_date: Date;
-  private _modify_date: string;
+  private _createDate: Date;
+  private _modifyDate: Date;
 
 
   /*constructor(obj) {
@@ -82,19 +82,20 @@ export class Incident {
   }
 
 
-  get create_date(): Date {
-    return this._create_date;
-  }
+    get createDate(): Date {
+        return this._createDate;
+    }
 
-  set create_date(value: Date) {
-    this._create_date = value;
-  }
+    set createDate(value: Date) {
+        this._createDate = value;
+    }
 
-  get modify_date(): string {
-    return this._modify_date;
-  }
 
-  set modify_date(value: string) {
-    this._modify_date = value;
-  }
+    get modifyDate(): Date {
+        return this._modifyDate;
+    }
+
+    set modifyDate(value: Date) {
+        this._modifyDate = value;
+    }
 }

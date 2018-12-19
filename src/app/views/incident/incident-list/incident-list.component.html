@@ -21,7 +21,7 @@
         <tr *ngFor="let incident of incidents">
           <td>{{incident.category.category}}</td>
           <td>{{incident.place}}</td>
-          <td>{{incident.create_date.getDay()}}-{{incident.create_date.getMonth()}}-{{incident.create_date.getFullYear()}}</td>
+          <td>{{incident.modifyDate.getDate()}}-{{incident.modifyDate.getMonth()+1}}-{{incident.modifyDate.getFullYear()}} {{incident.modifyDate.getHours()}}:{{incident.modifyDate.getMinutes()}}</td>
           <td>{{incident.live ? "Ja" : "Nee"}}</td>
           <td><a routerLink="/incident/detail/{{incident.id}}">Detail</a></td>
         </tr>

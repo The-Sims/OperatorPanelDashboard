@@ -12,13 +12,18 @@ export class WebsocketService {
     }
 
     private subject: Subject<MessageEvent>;
+    private connected: boolean = false;
 
-    public connect(url): Subject<MessageEvent> {
+    public connect(url, callback = null): Subject<MessageEvent> {
         if (!this.subject) {
             this.subject = this.create(url);
             console.log('connected');
-        }
-        else {
+            this.connected = true;
+            if (callback != null) {
+                callback();
+            }
+        } else {
+            this.connected = false;
             console.log('not connected');
         }
         return this.subject;

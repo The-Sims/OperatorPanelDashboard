@@ -9,49 +9,42 @@ import {Incident} from '../../../classes/incident';
 import {AnalyserwebsocksService} from '../../../services/websockets/analyserwebsocks.service';
 import {MessageUpdateIncident} from '../../../classes/messages/analysermessages/MessageUpdateIncident';
 import {MessageUpdateIncidents} from '../../../classes/messages/analysermessages/MessageUpdateIncidents';
+import {MessageConnectAsOperator} from '../../../classes/messages/analysermessages/MessageConnectAsOperator';
 
 
 @Component({
-  selector: 'app-incident-list',
-  templateUrl: './incident-list.component.html',
-  styleUrls: ['./incident-list.component.scss']
+    selector: 'app-incident-list',
+    templateUrl: './incident-list.component.html',
+    styleUrls: ['./incident-list.component.scss']
 })
 export class IncidentListComponent implements AfterViewInit {
-  public tableWidget: any;
-  public httpError: HttpErrorResponse = null;
-  protected incidents: Incident[];
+    public tableWidget: any;
+    public httpError: HttpErrorResponse = null;
+    protected incidents: Incident[] = [];
 
-  constructor(private incidentService: IncidentsService, private analyser: AnalyserwebsocksService) {
-      this.analyser.messages.subscribe(msg => {
-          console.log(msg.getMessageType);
-          console.log(msg.getMessageData);
-          this.switchComponent(msg);
-      });
-    this.incidentService.getAll().subscribe(
-      data => {
-        console.log(data, "Data");
-        this.incidents = [];
-        // for (let row of data) {
-        //   row.create_date = new Date(row.create_date);
-        //   for (let incidentDescription of row.incidentDescription){
-        //     incidentDescription.date = new Date(incidentDescription.date);
-        //   }
-        //   for (let reinforcementInfo of row.reinforcementInfo){
-        //     reinforcementInfo.date = new Date(reinforcementInfo.date);
-        //   }
-        //   this.incidents.push(Incident.fromJSON(row));
-        // }
-        console.log(this.incidents, 'Incidenten');
+    constructor(private incidentService: IncidentsService, private analyser: AnalyserwebsocksService) {
+        this.analyser.messages.subscribe(msg => {
+            this.switchComponent(msg);
+        });
+        //
+        // console.log('callback');
+        // analyser.callback();
+        this.incidentService.getAll().subscribe(
+            data => {
+                console.log(data, 'Data');
+                //this.setIncidents(data);
 
-        this.reInitDatatable();
-        //this.initDatatable();
-      }, error => {
-        this.httpError = error;
-        console.error('Couldn\'t connect to the rest server', error);
-      }
-    );
-  }
+                //this.initDatatable();
+            }, error => {
+                this.httpError = error;
+                console.error('Couldn\'t connect to the rest server', error);
+            }
+        );
+
+    }
+
     switchComponent(msg) {
+        //this.analyser.connectAsOperator();
         let message = null;
         switch (msg.getMessageType) {
             case 'public class communication.messages.sharedmessages.MessageUpdateIncident':
@@ -60,10 +53,14 @@ export class IncidentListComponent implements AfterViewInit {
                 //doet niks
                 break;
             case 'public class communication.messages.sharedmessages.MessageUpdateIncidents':
-                console.log('Me gotst an update incidents');
                 message = new MessageUpdateIncidents(JSON.parse(msg.getMessageData));
                 //TODO fix html (kan geen datum en 'live' niet lezen)
-                this.incidents = message.getIncidents;
+
+                this.setIncidents(message.getIncidents);
+                //this.incidents = message.getIncidents;
+                break;
+            case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
+                console.log('pong');
                 break;
             default:
                 console.log('rip');
@@ -71,39 +68,57 @@ export class IncidentListComponent implements AfterViewInit {
         }
     }
 
-  ngAfterViewInit() {
-    //this.reInitDatatable();
-  }
-
-  private reInitDatatable(): void {
-    if (this.tableWidget) {
-      this.tableWidget.destroy();
-      this.tableWidget = null;
+    setIncidents(incidents) {
+        console.log(incidents, 'Incidents received');
+        this.incidents = [];
+        for (let row of incidents) {
+            row.createDate = new Date(row.createDate);
+            row.modifyDate = new Date(row.modifyDate);
+            for (let incidentDescription of row.incidentDescription) {
+                incidentDescription.date = new Date(incidentDescription.date);
+            }
+            for (let reinforcementInfo of row.reinforcementInfo) {
+                reinforcementInfo.date = new Date(reinforcementInfo.date);
+            }
+            this.incidents.push(Incident.fromJSON(row));
+        }
+        console.log(this.incidents, 'Incidenten');
+        this.reInitDatatable();
     }
-    setTimeout(() => this.initDatatable(), 0);
-  }
 
-  protected initDatatable(): void {
-    const table: any = $('#datatable');
-    this.tableWidget = table.DataTable({
-      //data: this.incidentsToTableArray(this.incidents),
-      select: true
-    });
-  }
-
-  incidentsToTableArray(incidents: Incident[]) {
-    let dataSet = [];
-    for (let incident of incidents) {
-      dataSet.push(
-        [
-          incident.id,
-          incident.category,
-          incident.modify_date,
-          incident.live ? 'Ja' : 'Nee',
-          '<'
-        ]);
+    ngAfterViewInit() {
+        //this.reInitDatatable();
     }
-    return dataSet;
-  }
+
+    private reInitDatatable(): void {
+        if (this.tableWidget) {
+            this.tableWidget.destroy();
+            this.tableWidget = null;
+        }
+        setTimeout(() => this.initDatatable(), 0);
+    }
+
+    protected initDatatable(): void {
+        const table: any = $('#datatable');
+        this.tableWidget = table.DataTable({
+            //data: this.incidentsToTableArray(this.incidents),
+            select: true
+        });
+    }
+
+    incidentsToTableArray(incidents: Incident[]) {
+        let dataSet = [];
+        for (let incident of incidents) {
+            dataSet.push(
+                [
+                    incident.id,
+                    incident.category,
+                    incident.modifyDate,
+                    incident.live ? 'Ja' : 'Nee',
+                    '<'
+                ]);
+        }
+        return dataSet;
+    }
 
 }

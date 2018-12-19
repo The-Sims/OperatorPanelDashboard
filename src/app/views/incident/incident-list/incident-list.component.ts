@@ -13,9 +13,9 @@ import {MessageConnectAsOperator} from '../../../classes/messages/analysermessag
 
 
 @Component({
-    selector: 'app-unit-list',
-    templateUrl: './unit-list.component.html',
-    styleUrls: ['./unit-list.component.scss']
+    selector: 'app-incident-list',
+    templateUrl: './incident-list.component.html',
+    styleUrls: ['./incident-list.component.scss']
 })
 export class IncidentListComponent implements AfterViewInit {
     public tableWidget: any;

@@ -13,11 +13,11 @@ import {MessageConnectAsOperator} from '../../../classes/messages/analysermessag
 
 
 @Component({
-    selector: 'app-unit-list',
+    selector: 'app-incident-list',
     templateUrl: './unit-list.component.html',
     styleUrls: ['./unit-list.component.scss']
 })
-export class IncidentListComponent implements AfterViewInit {
+export class UnitListComponent implements AfterViewInit {
     public tableWidget: any;
     public httpError: HttpErrorResponse = null;
     protected incidents: Incident[] = [];

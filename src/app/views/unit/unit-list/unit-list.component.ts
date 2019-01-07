@@ -13,6 +13,7 @@ import {MessageConnectAsOperator} from '../../../classes/messages/analysermessag
 import {UnitwebsocksService} from '../../../services/websockets/unitwebsocks.service';
 import {MessageConfirmOrder} from '../../../classes/messages/unitmanagermessages/MessageConfirmOrder';
 import {MessageUnitListUpdate} from '../../../classes/messages/unitmanagermessages/MessageUnitListUpdate';
+import {Unit} from '../../../classes/Unit';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class UnitListComponent implements AfterViewInit {
     public tableWidget: any;
     public httpError: HttpErrorResponse = null;
     protected incidents: Incident[] = [];
+    protected units: Unit[] = [];
 
     constructor(private unit: UnitwebsocksService) {
         this.unit.messages.subscribe(msg => {

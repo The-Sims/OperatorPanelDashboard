@@ -10,6 +10,9 @@ import {AnalyserwebsocksService} from '../../../services/websockets/analyserwebs
 import {MessageUpdateIncident} from '../../../classes/messages/analysermessages/MessageUpdateIncident';
 import {MessageUpdateIncidents} from '../../../classes/messages/analysermessages/MessageUpdateIncidents';
 import {MessageConnectAsOperator} from '../../../classes/messages/analysermessages/MessageConnectAsOperator';
+import {UnitwebsocksService} from '../../../services/websockets/unitwebsocks.service';
+import {MessageConfirmOrder} from '../../../classes/messages/unitmanagermessages/MessageConfirmOrder';
+import {MessageUnitListUpdate} from '../../../classes/messages/unitmanagermessages/MessageUnitListUpdate';
 
 
 @Component({
@@ -22,42 +25,40 @@ export class UnitListComponent implements AfterViewInit {
     public httpError: HttpErrorResponse = null;
     protected incidents: Incident[] = [];
 
-    constructor(private incidentService: IncidentsService, private analyser: AnalyserwebsocksService) {
-        this.analyser.messages.subscribe(msg => {
+    constructor(private unit: UnitwebsocksService) {
+        this.unit.messages.subscribe(msg => {
             this.switchComponent(msg);
         });
         //
         // console.log('callback');
         // analyser.callback();
-        this.incidentService.getAll().subscribe(
-            data => {
-                console.log(data, 'Data');
-                //this.setIncidents(data);
-
-                //this.initDatatable();
-            }, error => {
-                this.httpError = error;
-                console.error('Couldn\'t connect to the rest server', error);
-            }
-        );
+        // this.incidentService.getAll().subscribe(
+        //     data => {
+        //         console.log(data, 'Data');
+        //         //this.setIncidents(data);
+        //
+        //         //this.initDatatable();
+        //     }, error => {
+        //         this.httpError = error;
+        //         console.error('Couldn\'t connect to the rest server', error);
+        //     }
+        // );
 
     }
 
     switchComponent(msg) {
-        //this.analyser.connectAsOperator();
         let message = null;
         switch (msg.getMessageType) {
-            case 'public class communication.messages.sharedmessages.MessageUpdateIncident':
-                console.log('Me gotst an update incident');
-                message = new MessageUpdateIncident(JSON.parse(msg.getMessageData));
-                //doet niks
+            case 'public class communication.messages.operatormessages.MessageConfirmOrderOperator':
+                console.log('Me gotst a confirm order');
+                message = new MessageConfirmOrder(JSON.parse(msg.getMessageData));
+                //todo do whatever you need to do with the data
                 break;
-            case 'public class communication.messages.sharedmessages.MessageUpdateIncidents':
-                message = new MessageUpdateIncidents(JSON.parse(msg.getMessageData));
-                //TODO fix html (kan geen datum en 'live' niet lezen)
-
-                this.setIncidents(message.getIncidents);
-                //this.incidents = message.getIncidents;
+            case 'public class communication.messages.operatormessages.MessageUnitListUpdate':
+                console.log('Me gotst a unit list update');
+                console.log(msg);
+                message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
+                //todo do whatever you need to do with the data
                 break;
             case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
                 console.log('pong');

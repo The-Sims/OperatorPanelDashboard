@@ -1,14 +1,14 @@
 import {Unit} from '../../Unit';
 
 export class MessageUnitListUpdate{
-  constructor(unitIds:Unit[]){
-    this.unitIds = unitIds;
+  constructor(units:Unit[]){
+    this.unit = units;
   }
 
-  private unitIds:Unit[] = [];
+  private unit:Unit[] = [];
 
 
-  get getUnitIds(): Unit[] {
-    return this.unitIds;
+  get getUnit(): Unit[] {
+    return this.unit;
   }
 }

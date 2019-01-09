@@ -53,14 +53,14 @@ export class UnitListComponent implements AfterViewInit {
         switch (msg.getMessageType) {
             case 'public class communication.messages.operatormessages.MessageConfirmOrderOperator':
                 console.log('Me gotst a confirm order');
-                message = new MessageConfirmOrder(JSON.parse(msg.getMessageData));
+                message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
                 //todo do whatever you need to do with the data
                 break;
             case 'public class communication.messages.operatormessages.MessageUnitListUpdate':
                 console.log('Me gotst a unit list update');
-                console.log(msg);
                 message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
-                //todo do whatever you need to do with the data
+                this.units=message.getUnit;
+                console.log(this.units);
                 break;
             case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
                 console.log('pong');

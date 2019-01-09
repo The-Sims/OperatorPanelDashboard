@@ -6,7 +6,7 @@ import {EncapsulatingMessage} from '../../classes/messages/EncapsulatingMessage'
 import {MessageConnectAsOperator} from '../../classes/messages/analysermessages/MessageConnectAsOperator';
 
 
-const CHAT_URL = 'ws:/145.93.112.226:8095/unitmanagerserver/websocket/';
+const CHAT_URL = 'ws:/145.93.88.172:8099/unitmanagerserver/websocket/';
 
 
 @Injectable({
@@ -26,7 +26,6 @@ export class UnitwebsocksService {
         this.messages = <Subject<EncapsulatingMessage>>wsService
             .connect(CHAT_URL)
             .map((response: MessageEvent): EncapsulatingMessage => {
-                console.log(response.data);
                 let msg = new EncapsulatingMessage(JSON.parse(response.data));
                 return msg;
             });

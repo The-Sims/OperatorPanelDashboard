@@ -9,6 +9,9 @@ import {MessageConfirmOrder} from '../../../classes/messages/unitmanagermessages
 import {MessageUnitListUpdate} from '../../../classes/messages/unitmanagermessages/MessageUnitListUpdate';
 import {MessageUpdateIncident} from '../../../classes/messages/analysermessages/MessageUpdateIncident';
 import {MessageUpdateIncidents} from '../../../classes/messages/analysermessages/MessageUpdateIncidents';
+import {FormControl} from '@angular/forms';
+import {IncidentDescription} from '../../../classes/incidentDescription';
+import {now} from 'moment';
 
 @Component({
     selector: 'app-incident-detail',
@@ -21,10 +24,42 @@ export class IncidentDetailComponent implements OnInit {
     protected incident: Incident = null;
     public httpError: HttpErrorResponse = null;
 
+  description = new FormControl();
+  reinforcedInfo = new FormControl();
+
     constructor(private incidentService: IncidentsService, private route: ActivatedRoute, private analyser: AnalyserwebsocksService) {
 
     }
 
+    addDescription(){
+      var description = this.description.value;
+      this.description = new FormControl();
+
+      var incidentDescription = new IncidentDescription();
+      incidentDescription.message = description;
+      incidentDescription.date = new Date();
+
+      this.incident.incidentDescription.push(incidentDescription);
+
+      console.log(this.incident, "Updated incident");
+    }
+
+    addReinforcedInfo(){
+      var reinforcedInfo = this.reinforcedInfo.value;
+      this.reinforcedInfo = new FormControl();
+
+      var incidentDescription = new IncidentDescription();
+      incidentDescription.message = reinforcedInfo;
+      incidentDescription.date = new Date();
+
+      this.incident.reinforcementInfo.push(incidentDescription);
+
+      console.log(this.incident, "Updated incident");
+    }
+
+  updateIncident(){
+
+  }
 
     confirmTip(tip: IncidentTip) {
         this.incidentService.confirmTip(tip.id).subscribe(
@@ -59,21 +94,30 @@ export class IncidentDetailComponent implements OnInit {
         this.route.params.subscribe(
             params => {
                 this.id = params['id'];
-                this.incidentService.getById(this.id).subscribe(
-                    data => {
-                        data.createDate = new Date(data.createDate);
-                        for (let incidentDescription of data.incidentDescription) {
-                            incidentDescription.date = new Date(incidentDescription.date);
-                        }
-                        for (let reinforcementInfo of data.reinforcementInfo) {
-                            reinforcementInfo.date = new Date(reinforcementInfo.date);
-                        }
-                        this.incident = Incident.fromJSON(data);
-                        console.log(this.incident, 'Incident');
-                    }
-                );
+                this.setIncidentWithId(this.id);
             }
         );
+    }
+
+    setIncidentWithIdAndWS(){
+
+    }
+
+    setIncidentWithId(id){
+      this.incidentService.getById(id).subscribe(
+        data => {
+          console.log(data, 'Raw data');
+          data.createDate = new Date(data.createDate);
+          for (let incidentDescription of data.incidentDescription) {
+            incidentDescription.date = new Date(incidentDescription.date);
+          }
+          for (let reinforcementInfo of data.reinforcementInfo) {
+            reinforcementInfo.date = new Date(reinforcementInfo.date);
+          }
+          this.incident = Incident.fromJSON(data);
+          console.log(this.incident, 'Incident');
+        }
+      );
     }
 
 

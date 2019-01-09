@@ -2,7 +2,7 @@
   <div *ngIf="httpError == null && incidents == null">
     <app-pacman></app-pacman>
   </div>
-  <div *ngIf="httpError == null && incidents != null" class="card">
+  <div *ngIf="incidents != null" class="card">
     <div class="card-header">
       Incoming messages
     </div>
@@ -29,7 +29,7 @@
       </table>
     </div>
   </div>
-  <div *ngIf="httpError != null">
+  <div *ngIf="httpError != null && incidents == null">
     <app-error-card [title]="httpError.name + ': ' + httpError.status " [message]="httpError.message"></app-error-card>
   </div>
 </div>

@@ -25,6 +25,7 @@ export class UnitListComponent implements AfterViewInit {
     public tableWidget: any;
     public httpError: HttpErrorResponse = null;
     protected incidents: Incident[] = [];
+
     protected units: Unit[] = [];
 
     constructor(private unit: UnitwebsocksService) {

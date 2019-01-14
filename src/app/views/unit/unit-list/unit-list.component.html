@@ -13,7 +13,6 @@
           <th>Id</th>
           <th>Naam</th>
           <th>Beschikbaarheid</th>
-          <th>Acties</th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +20,6 @@
           <td>{{unit.getUnitId}}</td>
           <td>{{unit.getUnitName}}</td>
           <td>{{unit.getUnitAvailability ? "Ja" : "Nee"}}</td>
-          <td><a routerLink="/unit/detail/{{unit.getUnitId}}">Detail</a></td>
         </tr>
         </tbody>
       </table>

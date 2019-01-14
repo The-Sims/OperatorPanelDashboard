@@ -60,15 +60,14 @@ export class UnitListComponent implements AfterViewInit {
       case 'public class communication.messages.operatormessages.MessageUnitListUpdate':
         console.log('Me gotst a unit list update');
         message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
-        var tmpUnits = message.getUnit();
+
+        var tmpUnits = message.getUnits;
         var units: Unit[] = [];
         for (const row of tmpUnits.unitIds) {
           var unit = new Unit(row);
+          this.units.push(unit);
           console.log(unit, "Foreach unit loop");
         }
-        this.units = message.getUnit;
-
-        console.log(this.units, "Units");
         break;
       case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
         console.log('pong');
@@ -79,23 +78,6 @@ export class UnitListComponent implements AfterViewInit {
     }
   }
 
-  setIncidents(incidents) {
-    console.log(incidents, 'Incidents received');
-    this.incidents = [];
-    for (let row of incidents) {
-      row.createDate = new Date(row.createDate);
-      row.modifyDate = new Date(row.modifyDate);
-      for (let incidentDescription of row.incidentDescription) {
-        incidentDescription.date = new Date(incidentDescription.date);
-      }
-      for (let reinforcementInfo of row.reinforcementInfo) {
-        reinforcementInfo.date = new Date(reinforcementInfo.date);
-      }
-      this.incidents.push(Incident.fromJSON(row));
-    }
-    console.log(this.incidents, 'Incidenten');
-    this.reInitDatatable();
-  }
 
   ngAfterViewInit() {
     //this.reInitDatatable();
@@ -117,19 +99,6 @@ export class UnitListComponent implements AfterViewInit {
     });
   }
 
-  incidentsToTableArray(incidents: Incident[]) {
-    let dataSet = [];
-    for (let incident of incidents) {
-      dataSet.push(
-        [
-          incident.id,
-          incident.category,
-          incident.modifyDate,
-          incident.live ? 'Ja' : 'Nee',
-          '<'
-        ]);
-    }
-    return dataSet;
-  }
+
 
 }

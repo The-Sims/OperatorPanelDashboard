@@ -8,7 +8,7 @@ export class MessageUnitListUpdate{
   private unit:Unit[] = [];
 
 
-  get getUnit(): Unit[] {
+  get getUnits(): Unit[] {
     return this.unit;
   }
 }

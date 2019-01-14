@@ -17,112 +17,119 @@ import {Unit} from '../../../classes/Unit';
 
 
 @Component({
-    selector: 'app-incident-list',
-    templateUrl: './unit-list.component.html',
-    styleUrls: ['./unit-list.component.scss']
+  selector: 'app-incident-list',
+  templateUrl: './unit-list.component.html',
+  styleUrls: ['./unit-list.component.scss']
 })
 export class UnitListComponent implements AfterViewInit {
-    public tableWidget: any;
-    public httpError: HttpErrorResponse = null;
-    protected incidents: Incident[] = [];
+  public tableWidget: any;
+  public httpError: HttpErrorResponse = null;
+  protected incidents: Incident[] = [];
 
-    protected units: Unit[] = [];
+  protected units: Unit[] = [];
 
-    constructor(private unit: UnitwebsocksService) {
-        this.unit.messages.subscribe(msg => {
-            this.switchComponent(msg);
-        });
-        //
-        // console.log('callback');
-        // analyser.callback();
-        // this.incidentService.getAll().subscribe(
-        //     data => {
-        //         console.log(data, 'Data');
-        //         //this.setIncidents(data);
-        //
-        //         //this.initDatatable();
-        //     }, error => {
-        //         this.httpError = error;
-        //         console.error('Couldn\'t connect to the rest server', error);
-        //     }
-        // );
+  constructor(private unit: UnitwebsocksService) {
+    this.unit.messages.subscribe(msg => {
+      this.switchComponent(msg);
+    });
+    //
+    // console.log('callback');
+    // analyser.callback();
+    // this.incidentService.getAll().subscribe(
+    //     data => {
+    //         console.log(data, 'Data');
+    //         //this.setIncidents(data);
+    //
+    //         //this.initDatatable();
+    //     }, error => {
+    //         this.httpError = error;
+    //         console.error('Couldn\'t connect to the rest server', error);
+    //     }
+    // );
 
-    }
+  }
 
-    switchComponent(msg) {
-        let message = null;
-        switch (msg.getMessageType) {
-            case 'public class communication.messages.operatormessages.MessageConfirmOrderOperator':
-                console.log('Me gotst a confirm order');
-                message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
-                //todo do whatever you need to do with the data
-                break;
-            case 'public class communication.messages.operatormessages.MessageUnitListUpdate':
-                console.log('Me gotst a unit list update');
-                message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
-                this.units=message.getUnit;
-                console.log(this.units);
-                break;
-            case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
-                console.log('pong');
-                break;
-            default:
-                console.log('rip');
-                break;
+  switchComponent(msg) {
+    let message = null;
+    switch (msg.getMessageType) {
+      case 'public class communication.messages.operatormessages.MessageConfirmOrderOperator':
+        console.log('Me gotst a confirm order');
+        message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
+        //todo do whatever you need to do with the data
+        break;
+      case 'public class communication.messages.operatormessages.MessageUnitListUpdate':
+        console.log('Me gotst a unit list update');
+        message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
+        var tmpUnits = message.getUnit();
+        var units: Unit[] = [];
+        for (const row of tmpUnits.unitIds) {
+          var unit = new Unit(row);
+          console.log(unit, "Foreach unit loop");
         }
-    }
+        this.units = message.getUnit;
 
-    setIncidents(incidents) {
-        console.log(incidents, 'Incidents received');
-        this.incidents = [];
-        for (let row of incidents) {
-            row.createDate = new Date(row.createDate);
-            row.modifyDate = new Date(row.modifyDate);
-            for (let incidentDescription of row.incidentDescription) {
-                incidentDescription.date = new Date(incidentDescription.date);
-            }
-            for (let reinforcementInfo of row.reinforcementInfo) {
-                reinforcementInfo.date = new Date(reinforcementInfo.date);
-            }
-            this.incidents.push(Incident.fromJSON(row));
-        }
-        console.log(this.incidents, 'Incidenten');
-        this.reInitDatatable();
+        console.log(this.units, "Units");
+        break;
+      case 'public class communication.messages.operatormessages.MessageConnectAsOperator':
+        console.log('pong');
+        break;
+      default:
+        console.log('rip');
+        break;
     }
+  }
 
-    ngAfterViewInit() {
-        //this.reInitDatatable();
+  setIncidents(incidents) {
+    console.log(incidents, 'Incidents received');
+    this.incidents = [];
+    for (let row of incidents) {
+      row.createDate = new Date(row.createDate);
+      row.modifyDate = new Date(row.modifyDate);
+      for (let incidentDescription of row.incidentDescription) {
+        incidentDescription.date = new Date(incidentDescription.date);
+      }
+      for (let reinforcementInfo of row.reinforcementInfo) {
+        reinforcementInfo.date = new Date(reinforcementInfo.date);
+      }
+      this.incidents.push(Incident.fromJSON(row));
     }
+    console.log(this.incidents, 'Incidenten');
+    this.reInitDatatable();
+  }
 
-    private reInitDatatable(): void {
-        if (this.tableWidget) {
-            this.tableWidget.destroy();
-            this.tableWidget = null;
-        }
-        setTimeout(() => this.initDatatable(), 0);
-    }
+  ngAfterViewInit() {
+    //this.reInitDatatable();
+  }
 
-    protected initDatatable(): void {
-        const table: any = $('#datatable');
-        this.tableWidget = table.DataTable({
-            //data: this.incidentsToTableArray(this.incidents),
-            select: true
-        });
+  private reInitDatatable(): void {
+    if (this.tableWidget) {
+      this.tableWidget.destroy();
+      this.tableWidget = null;
     }
+    setTimeout(() => this.initDatatable(), 0);
+  }
 
-    incidentsToTableArray(incidents: Incident[]) {
-        let dataSet = [];
-        for (let incident of incidents) {
-            dataSet.push(
-                [
-                    incident.id,
-                    incident.category,
-                    incident.modifyDate,
-                    incident.live ? 'Ja' : 'Nee',
-                    '<'
-                ]);
-        }
-        return dataSet;
+  protected initDatatable(): void {
+    const table: any = $('#datatable');
+    this.tableWidget = table.DataTable({
+      //data: this.incidentsToTableArray(this.incidents),
+      select: true
+    });
+  }
+
+  incidentsToTableArray(incidents: Incident[]) {
+    let dataSet = [];
+    for (let incident of incidents) {
+      dataSet.push(
+        [
+          incident.id,
+          incident.category,
+          incident.modifyDate,
+          incident.live ? 'Ja' : 'Nee',
+          '<'
+        ]);
     }
+    return dataSet;
+  }
 
 }

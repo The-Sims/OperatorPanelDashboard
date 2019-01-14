@@ -6,7 +6,7 @@ import {EncapsulatingMessage} from '../../classes/messages/EncapsulatingMessage'
 import {MessageConnectAsOperator} from '../../classes/messages/analysermessages/MessageConnectAsOperator';
 
 
-const CHAT_URL = 'ws:/145.93.112.219:8090/analyserserver/websocket/';
+const CHAT_URL = 'ws:/145.93.112.100:8090/analyserserver/websocket/';
 
 
 @Injectable({

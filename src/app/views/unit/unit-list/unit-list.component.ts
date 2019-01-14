@@ -79,25 +79,25 @@ export class UnitListComponent implements AfterViewInit {
   }
 
 
-  ngAfterViewInit() {
-    //this.reInitDatatable();
-  }
-
-  private reInitDatatable(): void {
-    if (this.tableWidget) {
-      this.tableWidget.destroy();
-      this.tableWidget = null;
+    ngAfterViewInit() {
+        //this.reInitDatatable();
     }
-    setTimeout(() => this.initDatatable(), 0);
-  }
 
-  protected initDatatable(): void {
-    const table: any = $('#datatable');
-    this.tableWidget = table.DataTable({
-      //data: this.incidentsToTableArray(this.incidents),
-      select: true
-    });
-  }
+    private reInitDatatable(): void {
+        if (this.tableWidget) {
+            this.tableWidget.destroy();
+            this.tableWidget = null;
+        }
+        setTimeout(() => this.initDatatable(), 0);
+    }
+
+    protected initDatatable(): void {
+        const table: any = $('#datatable');
+        this.tableWidget = table.DataTable({
+            //data: this.incidentsToTableArray(this.incidents),
+            select: true
+        });
+    }
 
 
 

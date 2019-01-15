@@ -10,14 +10,12 @@
       <table id="datatable" class="table table-striped table-bordered table-sm row-border hover" datatable>
         <thead>
         <tr>
-          <th>Id</th>
           <th>Naam</th>
           <th>Beschikbaarheid</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let unit of units">
-          <td>{{unit.getUnitId}}</td>
           <td>{{unit.getUnitName}}</td>
           <td>{{unit.getUnitAvailability ? "Ja" : "Nee"}}</td>
         </tr>

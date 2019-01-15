@@ -32,13 +32,13 @@ export class PhasedplanAddComponent implements OnInit {
     for (const row of this.fieldArray) {
       const task = new PhasedplanTask();
       task.name = row.name;
-      task.message = row.description;
+      task.description = row.description;
       this.phasedplan.tasks.push(task);
     }
     if (this.newAttribute.name != null && this.newAttribute.description != null) {
       const task = new PhasedplanTask();
       task.name = this.newAttribute.name;
-      task.message = this.newAttribute.description;
+      task.description = this.newAttribute.description;
       this.phasedplan.tasks.push(task);
     }
     console.log(this.phasedplan);

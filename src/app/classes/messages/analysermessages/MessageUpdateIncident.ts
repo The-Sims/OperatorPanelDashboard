@@ -16,4 +16,10 @@ export class MessageUpdateIncident{
   get getConcluded(): boolean {
     return this.concluded;
   }
+
+  set setIncident(incident: Incident){
+    this.incident = incident;
+  }
+
+
 }

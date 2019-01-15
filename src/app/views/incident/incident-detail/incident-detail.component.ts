@@ -59,7 +59,8 @@ export class IncidentDetailComponent implements OnInit {
 
   updateIncident() {
     console.log(this.incident, 'Updated incident');
-    var tmp = new MessageUpdateIncident(this.incident);
+    var tmp = new MessageUpdateIncident(null);
+    tmp.setIncident = this.incident;
     this.analyser.sendMsg(tmp);
 
   }

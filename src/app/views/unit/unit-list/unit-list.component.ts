@@ -62,7 +62,7 @@ export class UnitListComponent implements AfterViewInit {
         message = new MessageUnitListUpdate(JSON.parse(msg.getMessageData));
 
         var tmpUnits = message.getUnits;
-        var units: Unit[] = [];
+        this.units = [];
         for (const row of tmpUnits.unitIds) {
           var unit = new Unit(row);
           this.units.push(unit);

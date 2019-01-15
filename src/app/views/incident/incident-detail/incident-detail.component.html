@@ -12,7 +12,7 @@
             <ul *ngIf="incident.incidentDescription.length > 0" class="timeline">
               <li *ngFor="let row of incident.incidentDescription">
                 <a target="_blank" href="#"></a>
-                <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}}
+                <a href="#!" class="float-right">{{row.date.getDate()}}-{{row.date.getMonth()+1}}-{{row.date.getFullYear()}}
                   {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
                 <p>{{row.message}}</p>
               </li>
@@ -30,7 +30,7 @@
             <ul *ngIf="incident.reinforcementInfo.length > 0" class="timeline">
               <li *ngFor="let row of incident.reinforcementInfo">
                 <a target="_blank" href="#"></a>
-                <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}}
+                <a href="#!" class="float-right">{{row.date.getDate()}}-{{row.date.getMonth()+1}}-{{row.date.getFullYear()}}
                   {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
                 <p>{{row.message}}</p>
               </li>

@@ -12,7 +12,7 @@
               <li *ngFor="let row of incident.incidentDescription">
                 <a target="_blank" href="#"></a>
                 <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}} {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
-                <p>{{row.message}}</p>
+                <p>{{row.description}}</p>
               </li>
             </ul>
             <p *ngIf="incident.incidentDescription.length === 0">
@@ -25,7 +25,7 @@
               <li *ngFor="let row of incident.reinforcementInfo">
                 <a target="_blank" href="#"></a>
                 <a href="#!" class="float-right">{{row.date.getDay()}}-{{row.date.getMonth()}}-{{row.date.getFullYear()}} {{row.date.getHours()}}:{{row.date.getMinutes()<10?"0":""}}{{row.date.getMinutes()}}</a>
-                <p>{{row.message}}</p>
+                <p>{{row.description}}</p>
               </li>
             </ul>
             <p *ngIf="incident.reinforcementInfo.length === 0">
